@@ -8,17 +8,25 @@ public class Ticket {
 
     public void ticketSeller() {
 
-        for (int ticketsLeft = 100; ticketsLeft >= 0; ticketsLeft--) {
+        int ticketsLeft = 100;
+
+        do {
             System.out.println("How many tickets would you like to buy?");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Please enter a valid number between 1 and 4.");
+                scanner.nextLine();
+                continue;
+            }
             int ticketSale = scanner.nextInt();
+            if (ticketSale > 4 || ticketSale < 1){
+                System.out.println("Sorry, I can only sell between 1 and 4 tickets.");
+                continue;
+            }
             ticketsLeft = ticketsLeft - ticketSale;
             System.out.println("There are " + ticketsLeft + " left.");
 
-            do {
-                if (ticketSale > 4 || ticketSale < 0) {
-                    System.out.println("Sorry, we can only sell you between 1 and 4 tickets.");
-                }
-            }
+        } while (ticketsLeft > 0);
+
         }
     }
-}
